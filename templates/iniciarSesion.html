@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} Iniciar Sesión {% endblock %}
+
+{% block content %}
+<style>
+    .errorlist{
+        color: red
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h3>Iniciar Sesión</h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-primary">Iniciar</button>
+                {% if error %}
+                    <li style="color: red">{{error}}</li>
+                {% endif %}
+            </form>
+            <p>¿No tienes cuenta? <a href="{% url 'woof:registrar' %}">Registrate Aqui</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

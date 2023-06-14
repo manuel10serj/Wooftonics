@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+ 
+{% block title %} {{servicio.titulo}} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4>Servicio: {{servicio.titulo}}</h4><hr>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{servicio.imagen.url}}" alt="" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h4>{{servicio.titulo}}</h4>
+            <h5>Categoria: {{servicio.categoria}}</h5>
+            <h5>Precio: <strike>${{servicio.precio_mercado}}</strike> Ahora: ${{servicio.precio_venta}}</h5>
+            <a href="{% url 'woof:solicitudes' servicio.id %}" class="btn btn-info">Solicitar</a>
+            <hr>
+            <p class="text-info">Garantia: {{servicio.garantia}}</p>
+            <p class="text-info">Politica de Devolucion: {{servicio.devolucion}}</p>
+            <hr>
+            <p>Descripción: {{servicio.descripcion}}</p>
+            <p>Anuncio visto {{servicio.conteo_vistas}} veces</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Acerca de{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Servicios en contratados</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Servicio</th>
+                        <th>Tasa</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in contratar.contratarServicio_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{cp.servicio.titulo}}</td>
+                        <td>{{cp.tasa}}</td>
+                        <td>{{cp.cantindad}}</td>
+                        <td>{{cp.subtotal}}</td>
+                        <td>
+                            <a href="{% url 'woof:adminServ' cp.id %}?action = inc" class="btn btn-primary"> + </a>
+                            <a href="{% url 'woof:adminServ' cp.id %}?action = dcr" class="btn btn-warning"> - </a>
+                            <a href="{% url 'woof:adminServ' cp.id %}?action = eli" class="btn btn-danger"> X </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Total</th>
+                        <th>$ {{contratar.total}}</th>
+                        {% if contratar.contratarservicios_set.all %}
+                        <th><a href="{% url 'woof:elimServ' %}">Borrar Servicios</a></th>
+                        {% endif %}
+                    </tr>
+                    {% if contratar.contratarservicios_set.all %}
+                    <tr>
+                        <th><a class="btn btn-info" href="{% url 'woof:verificar' %}">Verificar </a></th>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
